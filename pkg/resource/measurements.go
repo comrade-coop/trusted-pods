@@ -22,6 +22,17 @@ func (r ResourceMeasurementsMap) Add(namespace string, resource *Resource, value
 	}
 }
 
+func (r ResourceMeasurementsMap) Clone() (o ResourceMeasurementsMap) {
+	o = make(ResourceMeasurementsMap, len(r))
+	for k, v := range r {
+		o[k] = make(map[*Resource]*big.Float, len(v))
+		for res, f := range v {
+			o[k][res] = (&big.Float{}).Copy(f)
+		}
+	}
+	return
+}
+
 var CurrencyDisplayScale = big.NewFloat(1.0e-16)
 
 func (r ResourceMeasurementsMap) Display(writer io.Writer, priceTable *pb.PricingTable) {
