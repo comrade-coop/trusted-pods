@@ -22,7 +22,7 @@ type LoadingModel struct {
 // TODO take a callback to to start a specific task
 func NewLoadingModel() LoadingModel {
 	s := spinner.New()
-	s.Spinner = spinner.Moon
+	s.Spinner = spinner.Dot
 	s.Style = lipgloss.NewStyle().Foreground(lipgloss.Color("205"))
 	return LoadingModel{spinner: s}
 }

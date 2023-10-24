@@ -36,10 +36,10 @@ func (m PaymentModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, tea.Quit
 		case "backspace":
 			m := NewMainModel()
-			return m, tea.ClearScreen
+			return m, nil
 		case "enter":
 			m := handlePaymentSelection(m)
-			return m, tea.EnterAltScreen
+			return m, nil
 		}
 	case tea.WindowSizeMsg:
 		h, v := docStyle.GetFrameSize()

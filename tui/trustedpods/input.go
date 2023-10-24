@@ -94,7 +94,7 @@ func (m InputModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 		case "left":
 			m := NewPaymentModel()
-			return m, tea.ClearScreen
+			return m, nil
 		// Set focus to next input
 		case "tab", "shift+tab", "enter", "up", "down":
 			s := msg.String()

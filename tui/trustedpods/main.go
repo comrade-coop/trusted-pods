@@ -10,7 +10,7 @@ import (
 	"github.com/mbndr/figlet4go"
 )
 
-var docStyle = lipgloss.NewStyle().Margin(1, 2)
+var docStyle = lipgloss.NewStyle().Margin(1, 2).MaxHeight(20)
 
 type item struct {
 	title, desc string
@@ -53,7 +53,7 @@ func (m MainModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 		case "enter":
 			m := handleSelection(m)
-			return m, tea.ClearScreen
+			return m, nil
 
 		}
 	case tea.WindowSizeMsg:
@@ -78,13 +78,16 @@ func NewMainModel() MainModel {
 	}
 
 	m := MainModel{list: list.New(items, list.NewDefaultDelegate(), 40, 50)}
-	m.list.Title = "Trusted Pods"
+	// should load the configs and check if its first time using it,
+	// if so display proper welcoming message with last used account name
+	m.list.Title = "Welcome to trusted Pods"
 	return m
 }
 
 func main() {
+	banner()
 	m := NewMainModel()
-	p := tea.NewProgram(m, tea.WithAltScreen())
+	p := tea.NewProgram(m)
 
 	if _, err := p.Run(); err != nil {
 		fmt.Println("Error running program:", err)
@@ -92,9 +95,22 @@ func main() {
 	}
 }
 
-func banner() string {
+func banner() {
 
 	ascii := figlet4go.NewAsciiRender()
-	renderStr, _ := ascii.Render("Trusted Pods")
-	return renderStr
+
+	// Adding the colors to RenderOptions
+	options := figlet4go.NewRenderOptions()
+	options.FontColor = []figlet4go.Color{
+		// Colors can be given by default ansi color codes...
+		figlet4go.ColorGreen,
+		figlet4go.ColorYellow,
+		figlet4go.ColorCyan,
+		figlet4go.ColorMagenta,
+		figlet4go.ColorRed,
+		figlet4go.ColorYellow,
+	}
+
+	renderStr, _ := ascii.RenderOpts("Trusted Pods", options)
+	fmt.Print(renderStr)
 }
