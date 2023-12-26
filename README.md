@@ -1,5 +1,13 @@
 # Trusted Pods
 
+**NOTE**: This repository was moved to https://github.com/comrade-coop/apocryph. Use `git remote set-url origin git://github.com/comrade-coop/apocryph` (or `git remote set-url origin git@github.com:comrade-coop/apocryph.git`) to update your local clone/s to point to the right repository.
+
+What follows is the original README from before the move:
+
+.
+.
+
+
 Trusted Pods is a decentralized compute marketplace where developers can run container pods securely and confidentially through small and medium cloud providers.
 
 Once complete, this project would allow a regular user to deploy their own personal instance of "cloud" software (say, a wiki, website, gallery, storage backup, AI assistant, email/chat server, etc.) to another person's specialized machine, where it would run inside a secure computing enclave that no one else can access (using TEE technology) for a modest fee (however much the machine provider charges; it's a marketplace) and with regular uptime and data storage SLAs.
